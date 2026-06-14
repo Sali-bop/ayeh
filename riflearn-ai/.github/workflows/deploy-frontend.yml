@@ -1,0 +1,59 @@
+# ============================================================
+# .github/workflows/deploy-frontend.yml
+# ============================================================
+# GitHub Action que despliega el frontend automáticamente
+# cada vez que haces push a la rama main.
+# Azure Static Web Apps genera este archivo, pero aquí está
+# la versión personalizada con variables de entorno.
+# ============================================================
+
+name: Deploy Frontend to Azure Static Web Apps
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'frontend/**'   # Solo se activa si cambia algo en /frontend
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    name: Build and Deploy
+
+    steps:
+      # 1. Descarga el código del repo
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Instala Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      # 3. Instala dependencias
+      - name: Install dependencies
+        working-directory: frontend
+        run: npm ci
+
+      # 4. Construye el proyecto para producción
+      # VITE_API_URL se lee desde los Secrets de GitHub
+      - name: Build
+        working-directory: frontend
+        run: npm run build
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+
+      # 5. Despliega a Azure Static Web Apps
+      - name: Deploy to Azure Static Web Apps
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "frontend"
+          output_location: "dist"
