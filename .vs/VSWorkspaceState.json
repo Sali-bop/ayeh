@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\riflearn-ai",
+    "\\riflearn-ai\\.github",
+    "\\riflearn-ai\\backend",
+    "\\riflearn-ai\\frontend",
+    "\\riflearn-ai\\frontend\\src"
   ],
-  "SelectedNode": "\\.gitignore",
+  "SelectedNode": "\\riflearn-ai\\backend",
   "PreviewInSolutionExplorer": false
 }

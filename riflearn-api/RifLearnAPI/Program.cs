@@ -51,13 +51,13 @@ builder.Services.AddCors(options =>
     {
         policy
             .WithOrigins(
-                "http://localhost:5173",   // Vite dev server
-                "http://localhost:3000",   // por si usas otro puerto
-                "https://*.azurestaticapps.net" // producción en Azure
+                "http://localhost:5173",
+                "http://localhost:3000",
+                "https://ayeh-api-gmgtbfg0edace5d9.francecentral-01.azurewebsites.net",
+                "https://ayeh.netlify.app"
             )
             .AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowCredentials();
+            .AllowAnyMethod();
     });
 });
 

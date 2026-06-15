@@ -27,9 +27,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <p style={{ fontSize: '12px', color: 'var(--rif-textMuted)' }}>
-          TFM · React + ASP.NET Core + Azure · 2024
-        </p>
+        
       </div>
 
       <div style={{ maxWidth: '960px', margin: '1rem auto 0', textAlign: 'center' }}>
