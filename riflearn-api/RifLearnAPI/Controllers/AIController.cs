@@ -58,7 +58,7 @@ Reglas:
                 // Construimos el cuerpo de la petición a la API de Anthropic
                 var requestBody = new
                 {
-                    model      = "claude-sonnet-4-20250514",
+                    model      = "claude-sonnet-4-5",
                     max_tokens = 1000,
                     system     = systemPrompt,
                     messages   = dto.Messages.Select(m => new { role = m.Role, content = m.Content })
